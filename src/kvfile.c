@@ -60,7 +60,6 @@ KVFILE* KVFILE_read( const char* buf )
         token_buf[size--] = '\0';
         for ( ; size >= 0; size-- ) token_buf[size] = *( c + size );
 
-        // Key
         if ( token_i % 2 == 0 ) kvfile->keys[token_i / 2] = token_buf;
         else                    kvfile->values[token_i / 2] = token_buf;
     }
