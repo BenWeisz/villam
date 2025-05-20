@@ -19,7 +19,11 @@ int main()
 		printf( "key=%s, value=%s\n", kvfile->keys[i], kvfile->values[i] );
 	}
 
-	KVFILE_free( kvfile );
+	const char* output = KVFILE_write( kvfile );
+	printf( "%s", output );
+	free( ( char* )output );
 
+	KVFILE_free( kvfile );
+	
 	return 0;
 }

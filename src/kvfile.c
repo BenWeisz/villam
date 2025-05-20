@@ -117,7 +117,45 @@ unsigned int KVFILE_tokenize( const char* buf, unsigned int* tokens, unsigned in
 
 const char* KVFILE_write( const KVFILE* kvfile )
 {
-    return NULL;
+    // Figure out how much space we'll need to store the kv file in text form
+    unsigned int size = 0;
+    for ( unsigned int key_i = 0; key_i < kvfile->size; key_i++ )
+    {
+        char* c = kvfile->keys[key_i];
+        while ( ( *c ) != '\0' )
+        {
+            size++;
+            c++; // haha
+        }
+
+        size += 2; // = and \n
+
+        c = kvfile->values[key_i];
+        while ( ( *c ) != '\0' )
+        {
+            size++;
+            c++;
+        }
+    }
+
+    size += 2; // \n\0
+
+    // Allocate enough space for the output
+    char* buf = ( char* )malloc( sizeof( char ) * size );
+    if ( buf == NULL )
+    {
+        printf( "\e[1;31mERROR\e[0m | [%s:%d] : malloc\n", __FILE__, __LINE__ );
+        return NULL;
+    }
+
+    // Copy over the data
+    int pos = 0;
+    for ( unsigned int key_i = 0; key_i < kvfile->size; key_i++ )
+    {
+        pos += sprintf( buf + pos, "%s=%s\n", kvfile->keys[key_i], kvfile->values[key_i] );
+    }
+
+    return buf;
 }
 
 void KVFILE_free( KVFILE* kvfile )
