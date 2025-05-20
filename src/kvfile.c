@@ -175,3 +175,30 @@ void KVFILE_free( KVFILE* kvfile )
     kvfile->size = 0;
     free( ( KVFILE* )kvfile );
 }
+
+const char* KVFILE_get( const KVFILE* kvfile, const char* key )
+{
+    const char* match = NULL;
+    for ( unsigned int key_i = 0; key_i < kvfile->size; key_i++ )
+    {
+        const char* c1 = key;
+        const char* c2 = kvfile->keys[key_i];
+        
+        while ( ( *c1 ) != '\0' && ( *c2 ) != '\0' )
+        {
+            if ( ( *c1 ) != ( *c2 ) )
+            {
+                break;
+            }
+            c1++;
+            c2++;
+        }
+
+        if ( ( *c1 ) == '\0' && ( *c2 ) == '\0' )
+        {
+            return kvfile->values[key_i];
+        }
+    }
+
+    return match;
+}

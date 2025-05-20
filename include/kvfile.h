@@ -22,4 +22,6 @@ unsigned int KVFILE_tokenize( const char* buf, unsigned int* tokens, unsigned in
 const char* KVFILE_write( const KVFILE* kvfile );
 void KVFILE_free( KVFILE* kvfile );
 
+const char* KVFILE_get( const KVFILE* kvfile, const char* key );
+
 #endif // KVFILE_H
