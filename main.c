@@ -9,6 +9,7 @@ int main()
 	if (data != NULL)
 		printf("%s\n", data);
 
+	free(data);
 
 	const char* buf = " asdf \t = azxcv\r\nz = s\n\n\n\n # mama mia \t \t \r\n asd         =  dss";
 	
