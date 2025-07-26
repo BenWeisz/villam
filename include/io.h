@@ -12,4 +12,6 @@ char* IO_read_char(const char* path);
 
 char* IO_read_char_sized(const char* path, unsigned int* size);
 
+unsigned int IO_write(const char* path, const unsigned char* buf, const unsigned int size);
+
 #endif // IO_H

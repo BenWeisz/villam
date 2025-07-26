@@ -59,7 +59,7 @@ unsigned char* IO_read_internal(const char* path, unsigned int* size, const unsi
 	}
 
 	*size = bytes_read;
-    fclose(file);
+	fclose(file);
 
 	return data;
 }
