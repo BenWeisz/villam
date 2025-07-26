@@ -4,14 +4,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-unsigned char* IO_read_internal(const char* path, unsigned int* size, const unsigned int padding);
+typedef enum IO_MODE
+{
+    READ,
+    WRITE,
+    APPEND
+} IO_MODE;
 
-unsigned char* IO_read_uchar(const char* path, unsigned int* size);
+typedef struct IO_FILE
+{
+    FILE* file;
+    IO_MODE mode;
+} IO_FILE;
 
-char* IO_read_char(const char* path);
+IO_FILE IO_open(const char* path, IO_MODE mode);
+void IO_close(const IO_FILE file);
 
-char* IO_read_char_sized(const char* path, unsigned int* size);
+unsigned char* IO_read_internal(IO_FILE file, unsigned int* size, const unsigned int padding);
 
-unsigned int IO_write(const char* path, const unsigned char* buf, const unsigned int size);
+unsigned char* IO_read_uchar(IO_FILE file, unsigned int* size);
+
+char* IO_read_char(IO_FILE file);
+
+char* IO_read_char_sized(IO_FILE, unsigned int* size);
+
+unsigned int IO_write(IO_FILE, const unsigned char* buf, const unsigned int size);
 
 #endif // IO_H
