@@ -5,7 +5,7 @@ unsigned char* IO_read_internal(const char* path, unsigned int* size, const unsi
 	FILE* file = fopen(path, "rb");
 	if (file == NULL)
 	{
-		printf("ERROR: Failed to open file: %s\n", path);
+		printf("ERROR: Failed to open file for reading: %s\n", path);
 		*size = 0;
 		return NULL;
 	}
@@ -59,6 +59,7 @@ unsigned char* IO_read_internal(const char* path, unsigned int* size, const unsi
 	}
 
 	*size = bytes_read;
+    fclose(file);
 
 	return data;
 }
@@ -80,4 +81,24 @@ char* IO_read_char_sized(const char* path, unsigned int* size)
 	char* data = (char*)IO_read_internal(path, size, 1);
 	data[*size] = '\0';
 	return data;
+}
+
+unsigned int IO_write(const char* path, const unsigned char* buf, const unsigned int size)
+{
+    FILE* file = fopen(path, "wb");
+    if (file == NULL)
+    {
+        printf("ERROR: Failed to open file for writing: %s\n", path);
+        return 0;
+    }
+
+    size_t bytes_written = fwrite(buf, sizeof(unsigned char), size, file);
+    if (bytes_written != size)
+    {
+        printf("ERROR: Failed to write all the bytes\n");
+    }
+    
+    fclose(file);
+
+    return bytes_written;
 }
