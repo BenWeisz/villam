@@ -26,8 +26,8 @@ unsigned char* IO_read_uchar(IO_FILE file, unsigned int* size);
 
 char* IO_read_char(IO_FILE file);
 
-char* IO_read_char_sized(IO_FILE, unsigned int* size);
+char* IO_read_char_sized(IO_FILE file, unsigned int* size);
 
-unsigned int IO_write(IO_FILE, const unsigned char* buf, const unsigned int size);
+unsigned int IO_write(IO_FILE file, const unsigned char* buf, const unsigned int size);
 
 #endif // IO_H
