@@ -11,4 +11,5 @@ add_executable( ${EXE_NAME}
     src/io.c
     src/kvfile.c
     src/glist.c)
-target_include_directories( ${EXE_NAME} PUBLIC include/ )
+
+target_include_directories( ${EXE_NAME} PUBLIC include/ packed/ )

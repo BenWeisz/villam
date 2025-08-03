@@ -3,7 +3,10 @@
 
 #include "io.h"
 #include "kvfile.h"
-#include "glist.h"
+#include "packed/glist.h"
+
+GLIST_DECLARE(int, int_list)
+GLIST_DEFINE(int, int_list)
 
 int main()
 {
@@ -41,28 +44,28 @@ int main()
 	// KVFILE_free( kvfile );
 
 	// GLIST
-	GLIST* list = GLIST_create();
-	GLIST_add(list, 1);
-	GLIST_add(list, 2);
-	GLIST_add(list, 3);
-	GLIST_add(list, 4);
-	GLIST_add(list, 5);
-	GLIST_add(list, 6);
-	GLIST_add(list, 7);
-	GLIST_add(list, 8);
-	GLIST_add(list, 9);
-	GLIST_add(list, 10);
+	int_list* list = int_list_create();
+	int_list_add(list, 1);
+	int_list_add(list, 2);
+	int_list_add(list, 3);
+	int_list_add(list, 4);
+	int_list_add(list, 5);
+	int_list_add(list, 6);
+	int_list_add(list, 7);
+	int_list_add(list, 8);
+	int_list_add(list, 9);
+	int_list_add(list, 10);
 
-	GLIST_ITERATOR iter = GLIST_iterator(list);
-	printf("GLIST values: ");
+	int_list_ITERATOR iter = int_list_iterator(list);
+	printf("int_list values: ");
 	for (unsigned int i = 0; i < list->size; i++)
 	{
-		int* temp = GLIST_next(&iter);
+		int* temp = int_list_next(&iter);
 		printf("%d ", *temp);
 	}
 	printf("\n");
 
-	GLIST_destroy(list);
+	int_list_destroy(list);
 	
 	return 0;
 }
